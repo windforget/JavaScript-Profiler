@@ -1,0 +1,67 @@
+
+// TEST - execution times for individual functions
+// TODO - edges between caller and callee functions
+// TODO - frequency of calls
+// TODO - reconstruction of the dynamic call paths
+// TODO - identification of hot paths
+// TODO - tracking sources/causes of asynchronous callbacks
+
+// TEST - execution times for individual functions
+//3 ways to code it
+//getTime = save the number of milliseconds since 1970/01/01
+
+function execTime() {
+
+	var start = new Date().getTime(); //
+	function MyFunction(){
+		// code
+	}
+	var end = new Date().getTime();
+	var time = end - start;
+}
+
+function execTime(MyFunction) {
+    var start = new Date();
+    MyFunction();
+    return new Date() - start;
+}
+
+function execTime (callback) {
+    var start, done;
+    start = new Date();
+    callback.call();
+    done = new Date();
+    return done.getTime() - start.getTime();
+}
+
+// 2 ways to call it
+time = execTime(MyFunction() {
+    // CODE
+});
+
+time = execTime(MyFunction);
+
+// TODO - edges between caller and callee functions
+//to get the edge between A and B : if (funcA calls func B), {edge = execTime A - execTimeB}
+
+// TODO - frequency of calls
+//frequencç of calls : counter ?
+
+// TODO - reconstruction of the dynamic call paths
+//arguments.callee.caller.toString()
+
+//example found on stackoverflow :
+// var thisFunction = arguments.callee;
+// var caller = thisFunction.caller;
+// var callerCaller = caller.caller;
+//...and eventually, assuming no recursion:
+// var bottomCaller = ...;
+// assert(bottomCaller.caller === null);
+
+// TODO - identification of hot paths
+
+
+// TODO - tracking sources/causes of asynchronous callbacks
+
+
+// TODO - to calculate the execution time of the function MyFunction
